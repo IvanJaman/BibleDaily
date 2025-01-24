@@ -1,6 +1,7 @@
 package hr.ferit.bibledaily.ui.theme
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -32,11 +34,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Cyan
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import hr.ferit.bibledaily.R
 import hr.ferit.bibledaily.Routes
 
 @Composable
@@ -56,6 +62,15 @@ fun WelcomeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(150.dp)
+            )
+
+            Spacer(modifier = Modifier.height(40.dp))
+
             Text(
                 text = "Dobrodošli u BibleDaily!",
                 fontSize = 24.sp,
@@ -97,3 +112,11 @@ fun SaveButton(navigation: NavController) {
         Text("Spremi", color = Color.White)
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewWelcomeScreen() {
+    val mockNavController = androidx.navigation.compose.rememberNavController()
+    WelcomeScreen(navigation = mockNavController)
+}
+
