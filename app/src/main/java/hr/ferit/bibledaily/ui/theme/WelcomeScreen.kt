@@ -49,7 +49,7 @@ import hr.ferit.bibledaily.Routes
 fun WelcomeScreen(
     navigation: NavController
 ) {
-    var textFieldValue by remember { mutableStateOf(TextFieldValue("")) }
+    var userName by remember { mutableStateOf(TextFieldValue("")) }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -85,8 +85,8 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             OutlinedTextField(
-                value = textFieldValue,
-                onValueChange = { textFieldValue = it },
+                value = userName,
+                onValueChange = { userName = it },
                 label = { Text("Ime...") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 modifier = Modifier.fillMaxWidth()
@@ -94,15 +94,15 @@ fun WelcomeScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            SaveButton(navigation)
+            SaveButton(navigation, userName.text)
         }
     }
 }
 
 @Composable
-fun SaveButton(navigation: NavController) {
+fun SaveButton(navigation: NavController, userName: String) {
     Button(
-        onClick = { navigation.navigate(Routes.HOME_SCREEN) },
+        onClick = { navigation.navigate("${Routes.HOME_SCREEN}/$userName") },
         shape = RoundedCornerShape(50),
         modifier = Modifier
             .wrapContentWidth()
