@@ -1,15 +1,22 @@
 package hr.ferit.bibledaily.ui.theme
 
+import android.util.Log
+import android.widget.Button
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -20,7 +27,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
@@ -47,49 +56,151 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.size(70.dp)
+                modifier = Modifier.size(100.dp)
             )
 
             Text(
                 text = "Hvaljen Isus, $userName",
-                fontSize = 24.sp,
+                fontSize = 26.sp,
                 style = MaterialTheme.typography.headlineMedium
             )
 
             Text(
                 text = "Spreman za proučavanje Božje Riječi?",
-                fontSize = 20.sp,
+                fontSize = 21.sp,
                 style = MaterialTheme.typography.headlineMedium
             )
 
             Box(
                 modifier = Modifier
-                    .padding(top = 16.dp)
+                    .padding(16.dp)
                     .fillMaxWidth()
+                    .wrapContentSize()
+                    .background(color = BabyBlue, shape = RoundedCornerShape(30))
                     
             ) {
-                Text(
-                    text = "HomeScreen",
-                    style = TextStyle(color = Black, fontSize = 15.sp,
-                        fontWeight = FontWeight.Bold),
-                    modifier = Modifier.padding(horizontal = 26.dp, vertical =
-                    15.dp)
-                )
-                Text(
-                    text = "",
-                    style = TextStyle(color = Gray, fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold),
-                    modifier = Modifier.padding(horizontal = 26.dp, vertical =
-                    15.dp)
-                )
+                Column(
+                    modifier = Modifier
+                        .padding(10.dp),
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Text(
+                        text = "Evanđelje dana",
+                        style = TextStyle(
+                            color = Black, fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(horizontal = 26.dp)
+                    )
+                    Text(
+                        text = "adssaopj doap sdopasj  jfdasojš d",
+                        style = TextStyle(DarkGray, fontSize = 20.sp),
+                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 15.dp)
+                    )
+                }
             }
-            Spacer(modifier = Modifier.height(24.dp))
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Box(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth()
+                    .wrapContentSize()
+                    .background(color = BabyBlue, shape = RoundedCornerShape(30))
+
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Text(
+                        text = "Čitanje dana",
+                        style = TextStyle(
+                            color = Black, fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 5.dp)
+                    )
+                    Text(
+                        text = "adssaopj doap sdopasj  jfdasojš d",
+                        style = TextStyle(DarkGray, fontSize = 20.sp),
+                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 15.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Box(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth()
+                    .wrapContentSize()
+                    .background(color = BabyBlue, shape = RoundedCornerShape(30))
+
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Text(
+                        text = "Otpjevni psalam",
+                        style = TextStyle(
+                            color = Black, fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 5.dp)
+                    )
+                    Text(
+                        text = "adssaopj doap sdopasj  jfdasojš d",
+                        style = TextStyle(DarkGray, fontSize = 20.sp),
+                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 15.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Box(
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .wrapContentSize()
+                    .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(30))
+
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(16.dp),
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.notes),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(50.dp)
+
+                    )
+                    Text(
+                        text = "Moje bilješke",
+                        style = TextStyle(
+                            color = White, fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier
+                            .padding(horizontal = 26.dp, vertical = 5.dp)
+                            .align(Alignment.CenterVertically)
+                    )
+                }
+            }
         }
     }
 }

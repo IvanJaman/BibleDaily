@@ -1,5 +1,7 @@
 package hr.ferit.bibledaily
 
+import android.net.Uri
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -25,7 +27,8 @@ fun NavigationController() {
             route = Routes.HOME_SCREEN,
             arguments = listOf(navArgument("userName") { type = NavType.StringType })
         ) { backStackEntry ->
-            val userName = backStackEntry.arguments?.getString("userName") ?: "Gost"
+            val encodedUserName = backStackEntry.arguments?.getString("userName")
+            val userName = encodedUserName?.let { Uri.decode(it) } ?: "Gost"
             HomeScreen(navigation = navController, userName = userName)
         }
     }
