@@ -72,6 +72,7 @@ fun WelcomeScreen(
                 fontSize = 24.sp,
                 style = MaterialTheme.typography.headlineMedium
             )
+
             Text(
                 text = "Molimo Vas da unesete Vaše ime:",
                 fontSize = 20.sp,
@@ -105,7 +106,8 @@ fun SaveButton(navigation: NavController, userName: String) {
     Button(
         onClick = {
             if (userName.isNotBlank()) {
-                navigation.navigate("${Routes.HOME_SCREEN}/$userName")
+                Log.d("WelcomeScreen", "Navigating to HomeScreen with userName: $userName")
+                navigation.navigate("homeScreen/$userName")
             } else {
                 showAlert = true
             }

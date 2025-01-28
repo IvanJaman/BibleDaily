@@ -33,12 +33,9 @@ fun NavigationController() {
             WelcomeScreen(navigation = navController)
         }
 
-        composable(
-            route = Routes.HOME_SCREEN,
-            arguments = listOf(navArgument("userName") { type = NavType.StringType })
-        ) { backStackEntry ->
-            val userName = backStackEntry.arguments!!.getString("userName")!!
-            HomeScreen(navigation = navController, userName = userName)
+        composable("homeScreen/{userName}") { backStackEntry ->
+            val userName = backStackEntry.arguments?.getString("userName")
+            HomeScreen(navigation = navController, userName ?: "Gost")
         }
 
         composable(Routes.GOSPEL_SCREEN) {
