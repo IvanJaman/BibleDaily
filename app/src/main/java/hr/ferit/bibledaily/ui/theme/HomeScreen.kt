@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Button
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
@@ -42,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import hr.ferit.bibledaily.R
+import hr.ferit.bibledaily.Routes
 
 @Composable
 fun HomeScreen(
@@ -77,33 +80,27 @@ fun HomeScreen(
                 style = MaterialTheme.typography.headlineMedium
             )
 
+            Spacer(modifier = Modifier.height(80.dp))
+
             Box(
                 modifier = Modifier
                     .padding(16.dp)
-                    .fillMaxWidth()
-                    .wrapContentSize()
+                    .width(250.dp)
+                    .height(70.dp)
                     .background(color = BabyBlue, shape = RoundedCornerShape(30))
-                    
+                    .clickable {
+                        navigation.navigate("${Routes.GOSPEL_SCREEN}")
+                    },
+                    contentAlignment = Alignment.Center
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(10.dp),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    Text(
-                        text = "Evanđelje dana",
-                        style = TextStyle(
-                            color = Black, fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
-                        modifier = Modifier.padding(horizontal = 26.dp)
-                    )
-                    Text(
-                        text = "adssaopj doap sdopasj  jfdasojš d",
-                        style = TextStyle(DarkGray, fontSize = 20.sp),
-                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 15.dp)
-                    )
-                }
+                Text(
+                    text = "Evanđelje dana",
+                    style = TextStyle(
+                        color = Black, fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier.padding(horizontal = 26.dp)
+                )
             }
 
             Spacer(modifier = Modifier.height(5.dp))
@@ -111,30 +108,22 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .padding(10.dp)
-                    .fillMaxWidth()
-                    .wrapContentSize()
+                    .width(250.dp)
+                    .height(70.dp)
                     .background(color = BabyBlue, shape = RoundedCornerShape(30))
-
+                    .clickable {
+                        navigation.navigate("${Routes.READING_SCREEN}")
+                    },
+                contentAlignment = Alignment.Center
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    Text(
-                        text = "Čitanje dana",
-                        style = TextStyle(
-                            color = Black, fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
-                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 5.dp)
-                    )
-                    Text(
-                        text = "adssaopj doap sdopasj  jfdasojš d",
-                        style = TextStyle(DarkGray, fontSize = 20.sp),
-                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 15.dp)
-                    )
-                }
+                Text(
+                    text = "Čitanje dana",
+                    style = TextStyle(
+                        color = Black, fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier.padding(horizontal = 26.dp, vertical = 5.dp)
+                )
             }
 
             Spacer(modifier = Modifier.height(5.dp))
@@ -142,30 +131,22 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .padding(10.dp)
-                    .fillMaxWidth()
-                    .wrapContentSize()
+                    .width(250.dp)
+                    .height(70.dp)
                     .background(color = BabyBlue, shape = RoundedCornerShape(30))
-
+                    .clickable {
+                        navigation.navigate("${Routes.PSALM_SCREEN}")
+                    },
+                    contentAlignment = Alignment.Center
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    Text(
-                        text = "Otpjevni psalam",
-                        style = TextStyle(
-                            color = Black, fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
-                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 5.dp)
-                    )
-                    Text(
-                        text = "adssaopj doap sdopasj  jfdasojš d",
-                        style = TextStyle(DarkGray, fontSize = 20.sp),
-                        modifier = Modifier.padding(horizontal = 26.dp, vertical = 15.dp)
-                    )
-                }
+                Text(
+                    text = "Otpjevni psalam",
+                    style = TextStyle(
+                        color = Black, fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier.padding(horizontal = 26.dp, vertical = 5.dp)
+                )
             }
 
             Spacer(modifier = Modifier.height(5.dp))
@@ -175,7 +156,9 @@ fun HomeScreen(
                     .padding(top = 10.dp)
                     .wrapContentSize()
                     .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(30))
-
+                    .clickable {
+                        navigation.navigate("${Routes.MY_NOTES_SCREEN}")
+                    }
             ) {
                 Row(
                     modifier = Modifier

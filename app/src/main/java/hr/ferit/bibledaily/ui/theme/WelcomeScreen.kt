@@ -105,8 +105,7 @@ fun SaveButton(navigation: NavController, userName: String) {
     Button(
         onClick = {
             if (userName.isNotBlank()) {
-                val encodedUserName = Uri.encode(userName)
-                navigation.navigate("${Routes.HOME_SCREEN}/$encodedUserName")
+                navigation.navigate("${Routes.HOME_SCREEN}/$userName")
             } else {
                 showAlert = true
             }
@@ -132,8 +131,6 @@ fun SaveButton(navigation: NavController, userName: String) {
         )
     }
 }
-
-
 
 @Preview(showBackground = true)
 @Composable
