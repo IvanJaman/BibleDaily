@@ -46,6 +46,8 @@ import androidx.navigation.NavController
 import hr.ferit.bibledaily.R
 import hr.ferit.bibledaily.Routes
 
+
+
 @Composable
 fun HomeScreen(
     navigation: NavController,
@@ -59,14 +61,33 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.size(100.dp)
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.backarrow),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(50.dp)
+                        .width(50.dp)
+                        .clickable {
+                            // Handle back arrow click
+                        }
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                Image(
+                    painter = painterResource(id = R.drawable.logo),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.size(100.dp)
+                )
+            }
 
             Text(
                 text = "Hvaljen Isus, $userName",
@@ -91,7 +112,7 @@ fun HomeScreen(
                     .clickable {
                         navigation.navigate("${Routes.GOSPEL_SCREEN}")
                     },
-                    contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "Evanđelje dana",
@@ -137,7 +158,7 @@ fun HomeScreen(
                     .clickable {
                         navigation.navigate("${Routes.PSALM_SCREEN}")
                     },
-                    contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "Otpjevni psalam",
@@ -187,6 +208,7 @@ fun HomeScreen(
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

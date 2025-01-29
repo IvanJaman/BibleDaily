@@ -33,7 +33,7 @@ fun NavigationController() {
             WelcomeScreen(navigation = navController)
         }
 
-        composable("homeScreen/{userName}") { backStackEntry ->
+        composable(Routes.HOME_SCREEN) { backStackEntry ->
             val userName = backStackEntry.arguments?.getString("userName")
             HomeScreen(navigation = navController, userName ?: "Gost")
         }

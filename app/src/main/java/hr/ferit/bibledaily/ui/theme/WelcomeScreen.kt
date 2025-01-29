@@ -85,7 +85,7 @@ fun WelcomeScreen(
                 value = userName,
                 onValueChange = {
                     userName = it
-                    Log.d("WelcomeScreen", "Updated userName: ${userName.text}") },
+                },
 
                 label = { Text("Ime...") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -106,7 +106,6 @@ fun SaveButton(navigation: NavController, userName: String) {
     Button(
         onClick = {
             if (userName.isNotBlank()) {
-                Log.d("WelcomeScreen", "Navigating to HomeScreen with userName: $userName")
                 navigation.navigate("homeScreen/$userName")
             } else {
                 showAlert = true
