@@ -62,7 +62,7 @@ fun WelcomeScreen(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.size(150.dp)
+                modifier = Modifier.size(160.dp)
             )
 
             Spacer(modifier = Modifier.height(20.dp))

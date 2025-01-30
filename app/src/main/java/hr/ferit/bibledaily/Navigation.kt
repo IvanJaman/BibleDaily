@@ -25,7 +25,11 @@ object Routes {
 }
 
 @Composable
-fun NavigationController(viewModel: GospelViewModel) {
+fun NavigationController(
+    viewModel1: GospelViewModel,
+    viewModel2: ReadingViewModel,
+    viewModel3: PsalmViewModel
+) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Routes.WELCOME_SCREEN) {
 
@@ -35,22 +39,29 @@ fun NavigationController(viewModel: GospelViewModel) {
 
         composable(Routes.HOME_SCREEN) { backStackEntry ->
             val userName = backStackEntry.arguments?.getString("userName")
-            HomeScreen(navigation = navController, userName ?: "Gost")
+            HomeScreen(
+                navigation = navController,
+                userName ?: "Gost"
+            )
         }
 
         composable(Routes.GOSPEL_SCREEN) {
             GospelScreen(
-                viewModel = viewModel,
+                viewModel = viewModel1,
                 navigation = navController
             )
         }
 
         composable(Routes.READING_SCREEN) {
-            ReadingScreen(navigation = navController)
+            ReadingScreen(
+                viewModel = viewModel2,
+                navigation = navController)
         }
 
         composable(Routes.PSALM_SCREEN) {
-            PsalmScreen(navigation = navController)
+            PsalmScreen(
+                viewModel = viewModel3,
+                navigation = navController)
         }
 
         composable(Routes.MY_NOTES_SCREEN) {

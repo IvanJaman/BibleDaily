@@ -32,7 +32,7 @@ fun NavBar(
             ) {
                 Icon(
                     imageVector = Icons.Outlined.ArrowBack,
-                    contentDescription = "Back",
+                    contentDescription = null,
                     tint = BabyBlue,
                     modifier = Modifier.size(36.dp)
                 )
@@ -49,7 +49,7 @@ fun NavBar(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = null,
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(150.dp)
+            modifier = Modifier.size(300.dp)
         )
     }
 }

@@ -3,6 +3,7 @@ package hr.ferit.bibledaily.ui.theme
 import NavBar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,15 +21,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import hr.ferit.bibledaily.PsalmViewModel
 import hr.ferit.bibledaily.R
+import hr.ferit.bibledaily.ReadingViewModel
 
 @Composable
 fun PsalmScreen(
+    viewModel: PsalmViewModel,
     navigation: NavController
 ) {
     Scaffold(
@@ -39,53 +44,35 @@ fun PsalmScreen(
         }
     ) { paddingValues ->
         LazyColumn(
-            modifier = Modifier.padding(paddingValues).fillMaxHeight(),
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            item {
-                Box(
+            items(viewModel.psalmsData.size) {
+                Column(
                     modifier = Modifier
-                        .size(100.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.logo),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
-
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(6.dp)
-                        .fillMaxWidth()
+                        .padding(top = 20.dp)
                         .wrapContentSize()
+                        .fillMaxWidth()
+                        .padding(horizontal = 25.dp)
                 ) {
                     Text(
-                        text = "Mk 3,31-35\n" +
-                                "\n" +
-                                "Tko god vrši volju Božju, taj mi je brat i sestra i majka.\n",
+                        text = viewModel.psalmsData[it].Number,
                         fontSize = 21.sp,
                         fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.headlineMedium
+                        style = MaterialTheme.typography.headlineMedium,
+                        modifier = Modifier.padding(bottom = 15.dp)
                     )
-                }
-            }
-
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(6.dp)
-                        .fillMaxWidth()
-                ) {
                     Text(
-                        text = "Čitanje svetog Evanđelja po Marku\n" +
-                                "\n" +
-                                "U ono vrijeme: Dođu Isusova majka i braća njegova. Ostanu vani, a k njemu pošalju neka ga pozovu. Oko njega je sjedjelo mnoštvo. I reknu mu: »Eno vani majke tvoje i braće tvoje, traže te!« On im odgovori: »Tko je majka moja i braća moja?«\n" +
-                                "I okruži pogledom po onima što su sjedjeli oko njega u krugu i kaže: »Evo majke moje, evo braće moje! Tko god vrši volju Božju, taj mi je brat i sestra i majka.«\n" +
-                                "Riječ Gospodnja.",
+                        text = viewModel.psalmsData[it].Chorus,
+                        fontSize = 21.sp,
+                        fontStyle = FontStyle.Italic,
+                        style = MaterialTheme.typography.headlineMedium,
+                        modifier = Modifier.padding(bottom = 15.dp)
+                    )
+                    Text(
+                        text = viewModel.psalmsData[it].Text.replace("\\n", "\n"),
                         fontSize = 21.sp,
                         style = MaterialTheme.typography.headlineMedium
                     )
@@ -96,9 +83,10 @@ fun PsalmScreen(
 }
 
 
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewPsalmScreen() {
     val mockNavController = androidx.navigation.compose.rememberNavController()
-    PsalmScreen(navigation = mockNavController)
+    PsalmScreen(viewModel = PsalmViewModel(), navigation = mockNavController)
 }
