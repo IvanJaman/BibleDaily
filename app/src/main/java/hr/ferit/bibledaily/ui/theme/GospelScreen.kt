@@ -1,5 +1,6 @@
 package hr.ferit.bibledaily.ui.theme
 
+import NavBar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,28 +31,17 @@ import hr.ferit.bibledaily.R
 fun GospelScreen(
     navigation: NavController
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = White,
-    ) {
+    Scaffold(
+        topBar = {
+            NavBar(
+                onBackClick = { navigation.popBackStack() }
+            )
+        }
+    ) { paddingValues ->
         LazyColumn(
-            modifier = Modifier.padding(16.dp).fillMaxHeight(),
+            modifier = Modifier.padding(paddingValues).fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            item {
-                Box(
-                    modifier = Modifier
-                        .size(100.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.logo),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
-
             item {
                 Box(
                     modifier = Modifier
@@ -89,7 +80,6 @@ fun GospelScreen(
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
