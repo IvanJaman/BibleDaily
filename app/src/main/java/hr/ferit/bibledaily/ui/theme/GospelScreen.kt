@@ -1,13 +1,16 @@
 package hr.ferit.bibledaily.ui.theme
 
 import NavBar
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
@@ -25,10 +28,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import hr.ferit.bibledaily.GospelViewModel
 import hr.ferit.bibledaily.R
 
 @Composable
 fun GospelScreen(
+    viewModel: GospelViewModel,
     navigation: NavController
 ) {
     Scaffold(
@@ -39,41 +44,36 @@ fun GospelScreen(
         }
     ) { paddingValues ->
         LazyColumn(
-            modifier = Modifier.padding(paddingValues).fillMaxHeight(),
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            item {
+            items(viewModel.gospelsData.size) {
                 Box(
                     modifier = Modifier
-                        .padding(6.dp)
-                        .fillMaxWidth()
+                        .padding(top = 20.dp)
                         .wrapContentSize()
+                        .fillMaxWidth()
                 ) {
                     Text(
-                        text = "Mk 3,31-35\n" +
-                                "\n" +
-                                "Tko god vrši volju Božju, taj mi je brat i sestra i majka.\n",
+                        text = viewModel.gospelsData[it].Number,
                         fontSize = 21.sp,
                         fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.headlineMedium
+                        style = MaterialTheme.typography.headlineMedium,
+                        modifier = Modifier.padding(bottom = 20.dp)
                     )
-                }
-            }
-
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(6.dp)
-                        .fillMaxWidth()
-                ) {
                     Text(
-                        text = "Čitanje svetog Evanđelja po Marku\n" +
-                                "\n" +
-                                "U ono vrijeme: Dođu Isusova majka i braća njegova. Ostanu vani, a k njemu pošalju neka ga pozovu. Oko njega je sjedjelo mnoštvo. I reknu mu: »Eno vani majke tvoje i braće tvoje, traže te!« On im odgovori: »Tko je majka moja i braća moja?«\n" +
-                                "I okruži pogledom po onima što su sjedjeli oko njega u krugu i kaže: »Evo majke moje, evo braće moje! Tko god vrši volju Božju, taj mi je brat i sestra i majka.«\n" +
-                                "Riječ Gospodnja.",
+                        text = viewModel.gospelsData[it].MainThought,
                         fontSize = 21.sp,
-                        style = MaterialTheme.typography.headlineMedium
+                        style = MaterialTheme.typography.headlineMedium,
+                        modifier = Modifier.padding(top = 30.dp)
+                    )
+                    Text(
+                        text = viewModel.gospelsData[it].Text,
+                        fontSize = 21.sp,
+                        style = MaterialTheme.typography.headlineMedium,
+                        modifier = Modifier.padding(top = 100.dp)
                     )
                 }
             }
@@ -85,5 +85,5 @@ fun GospelScreen(
 @Composable
 fun PreviewGospelScreen() {
     val mockNavController = androidx.navigation.compose.rememberNavController()
-    GospelScreen(navigation = mockNavController)
+    GospelScreen(viewModel = GospelViewModel(), navigation = mockNavController)
 }

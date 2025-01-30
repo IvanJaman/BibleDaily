@@ -25,7 +25,7 @@ object Routes {
 }
 
 @Composable
-fun NavigationController() {
+fun NavigationController(viewModel: GospelViewModel) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Routes.WELCOME_SCREEN) {
 
@@ -39,7 +39,10 @@ fun NavigationController() {
         }
 
         composable(Routes.GOSPEL_SCREEN) {
-            GospelScreen(navigation = navController)
+            GospelScreen(
+                viewModel = viewModel,
+                navigation = navController
+            )
         }
 
         composable(Routes.READING_SCREEN) {
