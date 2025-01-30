@@ -76,8 +76,8 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .padding(16.dp)
-                    .width(250.dp)
-                    .height(70.dp)
+                    .width(280.dp)
+                    .height(80.dp)
                     .background(color = BabyBlue, shape = RoundedCornerShape(30))
                     .clickable {
                         navigation.navigate(Routes.GOSPEL_SCREEN)
@@ -99,8 +99,8 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .padding(10.dp)
-                    .width(250.dp)
-                    .height(70.dp)
+                    .width(280.dp)
+                    .height(80.dp)
                     .background(color = BabyBlue, shape = RoundedCornerShape(30))
                     .clickable {
                         navigation.navigate(Routes.READING_SCREEN)
@@ -122,8 +122,8 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .padding(10.dp)
-                    .width(250.dp)
-                    .height(70.dp)
+                    .width(280.dp)
+                    .height(80.dp)
                     .background(color = BabyBlue, shape = RoundedCornerShape(30))
                     .clickable {
                         navigation.navigate(Routes.PSALM_SCREEN)
@@ -175,11 +175,45 @@ fun HomeScreen(
                     )
                 }
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Box(
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .wrapContentSize()
+                    .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(30))
+                    .clickable {
+                        navigation.navigate(Routes.FAVOURITES_SCREEN)
+                    }
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(16.dp),
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.heart),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .height(40.dp)
+                            .width(40.dp)
+
+                    )
+                    Text(
+                        text = "Omiljeno",
+                        style = TextStyle(
+                            color = White, fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier
+                            .padding(horizontal = 26.dp, vertical = 5.dp)
+                            .align(Alignment.CenterVertically)
+                    )
+                }
+            }
         }
     }
 }
-
-
 
 @Preview(showBackground = true)
 @Composable

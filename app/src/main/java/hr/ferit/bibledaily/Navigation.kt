@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import hr.ferit.bibledaily.ui.theme.FavouritesScreen
 import hr.ferit.bibledaily.ui.theme.GospelScreen
 import hr.ferit.bibledaily.ui.theme.HomeScreen
 import hr.ferit.bibledaily.ui.theme.MyNotesScreen
@@ -22,6 +23,7 @@ object Routes {
     const val READING_SCREEN = "readingScreen"
     const val PSALM_SCREEN = "psalmScreen"
     const val MY_NOTES_SCREEN = "myNotesScreen"
+    const val FAVOURITES_SCREEN = "favouritesScreen"
 }
 
 @Composable
@@ -66,6 +68,10 @@ fun NavigationController(
 
         composable(Routes.MY_NOTES_SCREEN) {
             MyNotesScreen(navigation = navController)
+        }
+
+        composable(Routes.FAVOURITES_SCREEN) {
+            FavouritesScreen(navigation = navController)
         }
     }
 }
