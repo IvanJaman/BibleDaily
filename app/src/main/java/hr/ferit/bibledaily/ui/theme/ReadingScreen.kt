@@ -1,6 +1,7 @@
 package hr.ferit.bibledaily.ui.theme
 
 import NavBar
+import android.widget.Button
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -20,6 +23,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -50,33 +55,59 @@ fun ReadingScreen(
                 .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(viewModel.readingsData.size) {
-                Column(
+            items(viewModel.readingsData.size) {  index ->
+                val reading = viewModel.readingsData[index]
+                val isFavourited = viewModel.readingsData[index].isFavourited
+
+                Box(
                     modifier = Modifier
-                        .padding(top = 20.dp)
-                        .wrapContentSize()
                         .fillMaxWidth()
-                        .padding(horizontal = 25.dp)
+                        .padding(horizontal = 25.dp, vertical = 10.dp)
                 ) {
-                    Text(
-                        text = viewModel.readingsData[it].Number,
-                        fontSize = 21.sp,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.headlineMedium,
-                        modifier = Modifier.padding(bottom = 15.dp)
-                    )
-                    Text(
-                        text = viewModel.readingsData[it].MainThought,
-                        fontSize = 21.sp,
-                        fontStyle = FontStyle.Italic,
-                        style = MaterialTheme.typography.headlineMedium,
-                        modifier = Modifier.padding(bottom = 15.dp)
-                    )
-                    Text(
-                        text = viewModel.readingsData[it].Text.replace("\\n", "\n"),
-                        fontSize = 21.sp,
-                        style = MaterialTheme.typography.headlineMedium
-                    )
+                    Column(
+                        modifier = Modifier
+                            .padding(top = 20.dp)
+                            .wrapContentSize()
+                            .fillMaxWidth()
+                            .padding(horizontal = 25.dp)
+                    ) {
+                        Text(
+                            text = reading.number,
+                            fontSize = 21.sp,
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.padding(bottom = 15.dp)
+                        )
+                        Text(
+                            text = reading.mainThought,
+                            fontSize = 21.sp,
+                            fontStyle = FontStyle.Italic,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.padding(bottom = 15.dp)
+                        )
+                        Text(
+                            text = reading.text.replace("\\n", "\n"),
+                            fontSize = 21.sp,
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                    }
+
+                    IconButton(
+                        onClick = {
+                            val updatedReading = viewModel.readingsData[index].copy(
+                                isFavourited = !viewModel.readingsData[index].isFavourited
+                            )
+                            viewModel.updateReading(updatedReading)
+                            viewModel.readingsData[index] = updatedReading
+                        },
+                        modifier = Modifier.align(Alignment.TopEnd)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.heart),
+                            contentDescription = null,
+                            tint = if (isFavourited) BabyBlue else Color.DarkGray
+                        )
+                    }
                 }
             }
         }

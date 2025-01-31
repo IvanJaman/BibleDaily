@@ -148,42 +148,6 @@ fun HomeScreen(
                     .wrapContentSize()
                     .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(30))
                     .clickable {
-                        navigation.navigate(Routes.MY_NOTES_SCREEN)
-                    }
-            ) {
-                Row(
-                    modifier = Modifier
-                        .padding(16.dp),
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.notes),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .height(50.dp)
-                            .width(50.dp)
-
-                    )
-                    Text(
-                        text = "Moje bilješke",
-                        style = TextStyle(
-                            color = White, fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
-                        modifier = Modifier
-                            .padding(horizontal = 26.dp, vertical = 5.dp)
-                            .align(Alignment.CenterVertically)
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Box(
-                modifier = Modifier
-                    .padding(top = 10.dp)
-                    .wrapContentSize()
-                    .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(30))
-                    .clickable {
                         navigation.navigate(Routes.FAVOURITES_SCREEN)
                     }
             ) {

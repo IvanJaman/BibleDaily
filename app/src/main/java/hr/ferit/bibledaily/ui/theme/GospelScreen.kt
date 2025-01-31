@@ -1,28 +1,10 @@
-package hr.ferit.bibledaily.ui.theme
-
-import NavBar
-import android.util.Log
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,11 +14,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import hr.ferit.bibledaily.GospelViewModel
 import hr.ferit.bibledaily.R
+import hr.ferit.bibledaily.data.Gospel
+import hr.ferit.bibledaily.ui.theme.BabyBlue
 
 @Composable
 fun GospelScreen(
     viewModel: GospelViewModel,
-    navigation: NavController
+    navigation: NavController,
 ) {
     Scaffold(
         topBar = {
@@ -51,33 +35,58 @@ fun GospelScreen(
                 .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(viewModel.gospelsData.size) {
-                Column(
+            items(viewModel.gospelsData.size) { index ->
+                val gospel = viewModel.gospelsData[index]
+                val isFavourited = viewModel.gospelsData[index].isFavourited
+
+                Box(
                     modifier = Modifier
-                        .padding(top = 20.dp)
-                        .wrapContentSize()
                         .fillMaxWidth()
-                        .padding(horizontal = 25.dp)
+                        .padding(horizontal = 25.dp, vertical = 10.dp)
                 ) {
-                    Text(
-                        text = viewModel.gospelsData[it].Number,
-                        fontSize = 21.sp,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.headlineMedium,
-                        modifier = Modifier.padding(bottom = 15.dp)
-                    )
-                    Text(
-                        text = viewModel.gospelsData[it].MainThought,
-                        fontSize = 21.sp,
-                        fontStyle = FontStyle.Italic,
-                        style = MaterialTheme.typography.headlineMedium,
-                        modifier = Modifier.padding(bottom = 15.dp)
-                    )
-                    Text(
-                        text = viewModel.gospelsData[it].Text.replace("\\n", "\n"),
-                        fontSize = 21.sp,
-                        style = MaterialTheme.typography.headlineMedium
-                    )
+                    Column(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .fillMaxWidth()
+                            .padding(top = 20.dp)
+                    ) {
+                        Text(
+                            text = gospel.number,
+                            fontSize = 21.sp,
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.padding(bottom = 15.dp)
+                        )
+                        Text(
+                            text = gospel.mainThought,
+                            fontSize = 21.sp,
+                            fontStyle = FontStyle.Italic,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.padding(bottom = 15.dp)
+                        )
+                        Text(
+                            text = gospel.text.replace("\\n", "\n"),
+                            fontSize = 21.sp,
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                    }
+
+                    IconButton(
+                        onClick = {
+                            val updatedGospel = viewModel.gospelsData[index].copy(
+                                isFavourited = !viewModel.gospelsData[index].isFavourited
+                            )
+                            viewModel.updateGospel(updatedGospel)
+                            viewModel.gospelsData[index] = updatedGospel
+                        },
+                                modifier = Modifier.align(Alignment.TopEnd)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.heart),
+                            contentDescription = null,
+                            tint = if (isFavourited) BabyBlue else Color.DarkGray
+                        )
+                    }
                 }
             }
         }

@@ -22,10 +22,16 @@ class GospelViewModel: ViewModel() {
                 for (data in result.documents) {
                     val gospel = data.toObject(Gospel::class.java)
                     if (gospel != null) {
-                        gospel.Id = data.id
+                        gospel.id = data.id
                         gospelsData.add(gospel)
                     }
                 }
             }
+    }
+
+    fun updateGospel(gospel: Gospel) {
+        db.collection("gospels")
+            .document(gospel.id)
+            .set(gospel)
     }
 }

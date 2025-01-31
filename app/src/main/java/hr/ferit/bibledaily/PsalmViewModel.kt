@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import hr.ferit.bibledaily.data.Gospel
 import hr.ferit.bibledaily.data.Psalm
 
 class PsalmViewModel: ViewModel() {
@@ -21,10 +22,16 @@ class PsalmViewModel: ViewModel() {
                 for (data in result.documents) {
                     val psalm = data.toObject(Psalm::class.java)
                     if (psalm != null) {
-                        psalm.Id = data.id
+                        psalm.id = data.id
                         psalmsData.add(psalm)
                     }
                 }
             }
+    }
+
+    fun updatePsalm(psalm: Psalm) {
+        db.collection("psalms")
+            .document(psalm.id)
+            .set(psalm)
     }
 }

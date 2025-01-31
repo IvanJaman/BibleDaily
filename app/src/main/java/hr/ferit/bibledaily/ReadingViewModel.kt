@@ -21,10 +21,16 @@ class ReadingViewModel: ViewModel() {
                 for (data in result.documents) {
                     val reading = data.toObject(Reading::class.java)
                     if (reading != null) {
-                        reading.Id = data.id
+                        reading.id = data.id
                         readingsData.add(reading)
                     }
                 }
             }
+    }
+
+    fun updateReading(reading: Reading) {
+        db.collection("readings")
+            .document(reading.id)
+            .set(reading)
     }
 }

@@ -1,5 +1,6 @@
 package hr.ferit.bibledaily
 
+import GospelScreen
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -8,10 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import hr.ferit.bibledaily.data.Gospel
 import hr.ferit.bibledaily.ui.theme.FavouritesScreen
-import hr.ferit.bibledaily.ui.theme.GospelScreen
 import hr.ferit.bibledaily.ui.theme.HomeScreen
-import hr.ferit.bibledaily.ui.theme.MyNotesScreen
 import hr.ferit.bibledaily.ui.theme.PsalmScreen
 import hr.ferit.bibledaily.ui.theme.ReadingScreen
 import hr.ferit.bibledaily.ui.theme.WelcomeScreen
@@ -22,7 +22,6 @@ object Routes {
     const val GOSPEL_SCREEN = "gospelScreen"
     const val READING_SCREEN = "readingScreen"
     const val PSALM_SCREEN = "psalmScreen"
-    const val MY_NOTES_SCREEN = "myNotesScreen"
     const val FAVOURITES_SCREEN = "favouritesScreen"
 }
 
@@ -64,10 +63,6 @@ fun NavigationController(
             PsalmScreen(
                 viewModel = viewModel3,
                 navigation = navController)
-        }
-
-        composable(Routes.MY_NOTES_SCREEN) {
-            MyNotesScreen(navigation = navController)
         }
 
         composable(Routes.FAVOURITES_SCREEN) {
