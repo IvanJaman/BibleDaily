@@ -33,4 +33,22 @@ class ReadingViewModel: ViewModel() {
             .document(reading.id)
             .set(reading)
     }
+
+    fun fetchFavouritedReadings() {
+        db.collection("readings")
+            .whereEqualTo("isFavourited", true)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    readingsData.clear()
+                    task.result?.documents?.forEach { document ->
+                        val reading = document.toObject(Reading::class.java)
+                        if (reading != null) {
+                            reading.id = document.id
+                            readingsData.add(reading)
+                        }
+                    }
+                }
+            }
+    }
 }

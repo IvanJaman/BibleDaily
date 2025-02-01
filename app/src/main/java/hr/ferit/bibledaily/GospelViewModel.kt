@@ -1,6 +1,5 @@
 package hr.ferit.bibledaily
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
@@ -33,5 +32,23 @@ class GospelViewModel: ViewModel() {
         db.collection("gospels")
             .document(gospel.id)
             .set(gospel)
+    }
+
+    fun fetchFavouritedGospels() {
+        db.collection("gospels")
+            .whereEqualTo("isFavourited", true)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    gospelsData.clear()
+                    task.result?.documents?.forEach { document ->
+                        val gospel = document.toObject(Gospel::class.java)
+                        if (gospel != null) {
+                            gospel.id = document.id
+                            gospelsData.add(gospel)
+                        }
+                    }
+                }
+            }
     }
 }

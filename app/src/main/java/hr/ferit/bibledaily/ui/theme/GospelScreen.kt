@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import hr.ferit.bibledaily.GospelViewModel
 import hr.ferit.bibledaily.R
-import hr.ferit.bibledaily.data.Gospel
 import hr.ferit.bibledaily.ui.theme.BabyBlue
 
 @Composable

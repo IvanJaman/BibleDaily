@@ -1,7 +1,5 @@
 package hr.ferit.bibledaily.ui.theme
 
-import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -39,7 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import hr.ferit.bibledaily.R
-import hr.ferit.bibledaily.Routes
 
 @Composable
 fun WelcomeScreen(

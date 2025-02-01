@@ -4,7 +4,6 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import hr.ferit.bibledaily.data.Gospel
 import hr.ferit.bibledaily.data.Psalm
 
 class PsalmViewModel: ViewModel() {
@@ -33,5 +32,23 @@ class PsalmViewModel: ViewModel() {
         db.collection("psalms")
             .document(psalm.id)
             .set(psalm)
+    }
+
+    fun fetchFavouritedPsalms() {
+        db.collection("psalms")
+            .whereEqualTo("isFavourited", true)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    psalmsData.clear()
+                    task.result?.documents?.forEach { document ->
+                        val psalm = document.toObject(Psalm::class.java)
+                        if (psalm != null) {
+                            psalm.id = document.id
+                            psalmsData.add(psalm)
+                        }
+                    }
+                }
+            }
     }
 }
