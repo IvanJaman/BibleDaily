@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -41,6 +40,7 @@ fun GospelScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .wrapContentSize()
                         .padding(horizontal = 25.dp, vertical = 10.dp)
                 ) {
                     Column(
@@ -78,7 +78,7 @@ fun GospelScreen(
                             viewModel.updateGospel(updatedGospel)
                             viewModel.gospelsData[index] = updatedGospel
                         },
-                                modifier = Modifier.align(Alignment.TopEnd)
+                        modifier = Modifier.align(Alignment.TopEnd)
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.heart),
@@ -92,9 +92,3 @@ fun GospelScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewGospelScreen() {
-    val mockNavController = androidx.navigation.compose.rememberNavController()
-    GospelScreen(viewModel = GospelViewModel(), navigation = mockNavController)
-}

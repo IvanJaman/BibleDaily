@@ -42,9 +42,9 @@ fun NavigationController(
         composable(Routes.GOSPEL_SCREEN) {
             GospelScreen(
                 viewModel = viewModel1,
-                navigation = navController
-            )
+                navigation = navController)
         }
+
 
         composable(Routes.READING_SCREEN) {
             ReadingScreen(

@@ -74,7 +74,7 @@ fun HomeScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Evanđelje dana",
+                    text = "Evanđelja",
                     style = TextStyle(
                         color = Black, fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
@@ -97,7 +97,7 @@ fun HomeScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Čitanje dana",
+                    text = "Čitanja",
                     style = TextStyle(
                         color = Black, fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
@@ -120,7 +120,7 @@ fun HomeScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Otpjevni psalam",
+                    text = "Psalmi",
                     style = TextStyle(
                         color = Black, fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
