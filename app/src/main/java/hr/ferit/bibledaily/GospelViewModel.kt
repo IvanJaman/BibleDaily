@@ -33,22 +33,4 @@ class GospelViewModel: ViewModel() {
             .document(gospel.id)
             .set(gospel)
     }
-
-    fun fetchFavouritedGospels() {
-        db.collection("gospels")
-            .whereEqualTo("isFavourited", true)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    gospelsData.clear()
-                    task.result?.documents?.forEach { document ->
-                        val gospel = document.toObject(Gospel::class.java)
-                        if (gospel != null) {
-                            gospel.id = document.id
-                            gospelsData.add(gospel)
-                        }
-                    }
-                }
-            }
-    }
 }

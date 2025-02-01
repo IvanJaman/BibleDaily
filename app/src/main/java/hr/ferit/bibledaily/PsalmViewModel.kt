@@ -33,22 +33,4 @@ class PsalmViewModel: ViewModel() {
             .document(psalm.id)
             .set(psalm)
     }
-
-    fun fetchFavouritedPsalms() {
-        db.collection("psalms")
-            .whereEqualTo("isFavourited", true)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    psalmsData.clear()
-                    task.result?.documents?.forEach { document ->
-                        val psalm = document.toObject(Psalm::class.java)
-                        if (psalm != null) {
-                            psalm.id = document.id
-                            psalmsData.add(psalm)
-                        }
-                    }
-                }
-            }
-    }
 }
