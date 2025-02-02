@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +27,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import hr.ferit.bibledaily.PsalmViewModel
 import hr.ferit.bibledaily.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun PsalmScreen(
@@ -48,6 +51,7 @@ fun PsalmScreen(
             items(viewModel.psalmsData.size) { index ->
                 val psalm = viewModel.psalmsData[index]
                 val isFavourited = viewModel.psalmsData[index].isFavourited
+                val date = SimpleDateFormat("dd. MM. yyyy.", Locale.getDefault()).format(psalm.date)
 
                 Box(
                     modifier = Modifier
@@ -61,6 +65,13 @@ fun PsalmScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 25.dp)
                     ) {
+                        Text(
+                            text = date,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.padding(bottom = 15.dp)
+                        )
                         Text(
                             text = psalm.number,
                             fontSize = 21.sp,
@@ -99,6 +110,11 @@ fun PsalmScreen(
                         )
                     }
                 }
+                Divider(
+                    color = Color.Gray,
+                    thickness = 1.dp,
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 5.dp)
+                )
             }
         }
     }

@@ -14,6 +14,8 @@ import androidx.navigation.NavController
 import hr.ferit.bibledaily.GospelViewModel
 import hr.ferit.bibledaily.R
 import hr.ferit.bibledaily.ui.theme.BabyBlue
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun GospelScreen(
@@ -36,6 +38,7 @@ fun GospelScreen(
             items(viewModel.gospelsData.size) { index ->
                 val gospel = viewModel.gospelsData[index]
                 val isFavourited = viewModel.gospelsData[index].isFavourited
+                val date = SimpleDateFormat("dd. MM. yyyy.", Locale.getDefault()).format(gospel.date)
 
                 Box(
                     modifier = Modifier
@@ -49,6 +52,13 @@ fun GospelScreen(
                             .fillMaxWidth()
                             .padding(top = 20.dp)
                     ) {
+                        Text(
+                            text = date,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.padding(bottom = 15.dp)
+                        )
                         Text(
                             text = gospel.number,
                             fontSize = 21.sp,
@@ -87,6 +97,12 @@ fun GospelScreen(
                         )
                     }
                 }
+
+                Divider(
+                    color = Color.Gray,
+                    thickness = 1.dp,
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 5.dp)
+                )
             }
         }
     }
